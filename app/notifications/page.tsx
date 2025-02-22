@@ -251,7 +251,7 @@ export default function NotificationsPage1() {
                   <td className="px-4 py-3 text-center">
                     <Badge variant="default" className="bg-green-500">
                       {
-                        notification!.notificationCount!.toString()!
+                        notification!.notificationCount!
                       }
                     </Badge>
                   </td>
